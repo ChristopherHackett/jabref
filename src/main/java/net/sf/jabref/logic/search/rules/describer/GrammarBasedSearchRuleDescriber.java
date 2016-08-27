@@ -4,8 +4,9 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import net.sf.jabref.logic.l10n.Localization;
-import net.sf.jabref.logic.search.rules.GrammarBasedSearchRule;
 import net.sf.jabref.logic.util.strings.StringUtil;
+import net.sf.jabref.model.search.rules.GrammarBasedSearchRule;
+import net.sf.jabref.model.util.ModelStringUtil;
 import net.sf.jabref.search.SearchBaseVisitor;
 import net.sf.jabref.search.SearchParser;
 
@@ -57,8 +58,8 @@ public class GrammarBasedSearchRuleDescriber implements SearchDescriber {
             @Override
             public String visitComparison(SearchParser.ComparisonContext context) {
 
-                final String field = StringUtil.unquote(context.left.getText(), '"');
-                final String value = StringUtil.unquote(context.right.getText(), '"');
+                final String field = ModelStringUtil.unquote(context.left.getText(), '"');
+                final String value = ModelStringUtil.unquote(context.right.getText(), '"');
                 final GrammarBasedSearchRule.ComparisonOperator operator = GrammarBasedSearchRule.ComparisonOperator.build(context.operator.getText());
 
                 final boolean regExpFieldSpec = !Pattern.matches("\\w+", field);

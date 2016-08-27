@@ -138,15 +138,6 @@ public class StringUtilTest {
     }
 
     @Test
-    public void testUnquote() {
-        assertEquals("a:", StringUtil.unquote("a::", ':'));
-        assertEquals("a:;", StringUtil.unquote("a:::;", ':'));
-        assertEquals("a:b%c;", StringUtil.unquote("a::b:%c:;", ':'));
-    }
-
-
-
-    @Test
     public void testEncodeStringArray() {
         assertEquals(ENCODED_STRING_ARRAY_1, FileField.encodeStringArray(STRING_ARRAY_1));
         assertEquals(ENCODED_STRING_ARRAY_2, FileField.encodeStringArray(STRING_ARRAY_2));
@@ -161,12 +152,6 @@ public class StringUtilTest {
         // arrays first differed at element [0][1]; expected: null<null> but was: java.lang.String<null>
         // assertArrayEquals(stringArray2res, StringUtil.decodeStringDoubleArray(encStringArray2));
         assertArrayEquals(STRING_ARRAY_3, StringUtil.decodeStringDoubleArray(ENCODED_STRING_ARRAY_3));
-    }
-
-    @Test
-    public void testBooleanToBinaryString() {
-        assertEquals("0", StringUtil.booleanToBinaryString(false));
-        assertEquals("1", StringUtil.booleanToBinaryString(true));
     }
 
     @Test
@@ -267,31 +252,6 @@ public class StringUtilTest {
     @Test
     public void testIntValueOfWithNullExceptionfIfStringEmpty() {
         assertEquals(Optional.empty(), StringUtil.intValueOfOptional(""));
-    }
-
-    @Test
-    public void testQuoteSimple() {
-        assertEquals("a::", StringUtil.quote("a:", "", ':'));
-    }
-
-    @Test
-    public void testQuoteNullQuotation() {
-        assertEquals("a::", StringUtil.quote("a:", null, ':'));
-    }
-
-    @Test
-    public void testQuoteNullString() {
-        assertEquals("", StringUtil.quote(null, ";", ':'));
-    }
-
-    @Test
-    public void testQuoteQuotationCharacter() {
-        assertEquals("a:::;", StringUtil.quote("a:;", ";", ':'));
-    }
-
-    @Test
-    public void testQuoteMoreComplicated() {
-        assertEquals("a::b:%c:;", StringUtil.quote("a:b%c;", "%;", ':'));
     }
 
     @Test

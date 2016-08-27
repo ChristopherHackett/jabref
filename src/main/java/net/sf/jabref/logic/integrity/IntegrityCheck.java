@@ -13,16 +13,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import net.sf.jabref.BibDatabaseContext;
-import net.sf.jabref.FileDirectoryPreferences;
 import net.sf.jabref.logic.l10n.Localization;
 import net.sf.jabref.logic.util.io.FileUtil;
+import net.sf.jabref.model.database.BibDatabaseContext;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.FieldName;
 import net.sf.jabref.model.entry.FieldProperty;
 import net.sf.jabref.model.entry.FileField;
 import net.sf.jabref.model.entry.InternalBibtexFields;
 import net.sf.jabref.model.entry.ParsedFileField;
+import net.sf.jabref.model.metadata.FileDirectoryPreferences;
 
 import com.google.common.base.CharMatcher;
 
