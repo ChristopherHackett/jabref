@@ -10,7 +10,6 @@ import java.util.Set;
 import net.sf.jabref.logic.exporter.BibDatabaseWriter;
 import net.sf.jabref.logic.exporter.MetaDataSerializer;
 import net.sf.jabref.logic.importer.util.MetaDataParser;
-import net.sf.jabref.logic.l10n.Localization;
 import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.database.BibDatabaseContext;
@@ -252,7 +251,7 @@ public class DBMSSynchronizer {
 
         try {
             metaData.setParsedData(MetaDataParser.getParsedData(dbmsProcessor.getSharedMetaData(), keywordSeparator,
-                    metaData, Localization.lang("All entries")));
+                    metaData));
         } catch (ParseException e) {
             LOGGER.error("Parse error", e);
         }

@@ -1,4 +1,4 @@
-package net.sf.jabref.model.util;
+package net.sf.jabref.logic.util.strings;
 
 /**
  * A String tokenizer that works just like StringTokenizer, but considers quoted

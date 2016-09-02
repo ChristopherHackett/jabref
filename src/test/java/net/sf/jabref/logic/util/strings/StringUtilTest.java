@@ -304,4 +304,11 @@ public class StringUtilTest {
     public void testBoldHTMLReturnsAlternativeTextIfNull() {
         assertEquals("<b>BB</b>", StringUtil.boldHTML(null, "BB"));
     }
+
+    @Test
+    public void testUnquote() {
+        assertEquals("a:", StringUtil.unquote("a::", ':'));
+        assertEquals("a:;", StringUtil.unquote("a:::;", ':'));
+        assertEquals("a:b%c;", StringUtil.unquote("a::b:%c:;", ':'));
+    }
 }

@@ -17,13 +17,6 @@ public class AllEntriesGroup extends AbstractGroup {
         super(name, GroupHierarchyType.INDEPENDENT);
     }
 
-    public static AbstractGroup fromString(String s, String name) {
-        if (!s.startsWith(AllEntriesGroup.ID)) {
-            throw new IllegalArgumentException("AllEntriesGroup cannot be created from \"" + s + "\".");
-        }
-        return new AllEntriesGroup(name);
-    }
-
     @Override
     public boolean supportsAdd() {
         return false;

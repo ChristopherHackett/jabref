@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.search.SearchMatcher;
@@ -38,31 +37,6 @@ public abstract class AbstractGroup implements SearchMatcher {
     protected AbstractGroup(String name, GroupHierarchyType context) {
         this.name = name;
         setHierarchicalContext(context);
-    }
-
-    /**
-     * Re-create a group instance from a textual representation.
-     *
-     * @param s The result from the group's toString() method.
-     * @return New instance of the encoded group.
-     * @throws ParseException If an error occurred and a group could not be created,
-     *                        e.g. due to a malformed regular expression.
-     */
-    public static AbstractGroup fromString(String s, String keywordSeparator, String allEntriesName)
-            throws ParseException {
-        if (s.startsWith(KeywordGroup.ID)) {
-            return KeywordGroup.fromString(s, keywordSeparator);
-        }
-        if (s.startsWith(AllEntriesGroup.ID)) {
-            return AllEntriesGroup.fromString(s, allEntriesName);
-        }
-        if (s.startsWith(SearchGroup.ID)) {
-            return SearchGroup.fromString(s);
-        }
-        if (s.startsWith(ExplicitGroup.ID)) {
-            return ExplicitGroup.fromString(s, keywordSeparator);
-        }
-        return null; // unknown group
     }
 
     public GroupHierarchyType getContext() {

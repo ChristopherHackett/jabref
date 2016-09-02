@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.search.SearchMatcher;
@@ -231,11 +230,6 @@ public class GroupTreeNode extends TreeNode<GroupTreeNode> {
     @Override
     public GroupTreeNode copyNode() {
         return GroupTreeNode.fromGroup(group);
-    }
-
-    public static GroupTreeNode parse(List<String> orderedData, String keywordSeparator, String allEntriesName)
-            throws ParseException {
-        return GroupsParser.importGroups(orderedData, keywordSeparator, allEntriesName);
     }
 
     /**

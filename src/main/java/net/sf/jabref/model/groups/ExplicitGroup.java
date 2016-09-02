@@ -9,7 +9,6 @@ import java.util.TreeSet;
 import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.FieldName;
 import net.sf.jabref.model.util.ModelStringUtil;
-import net.sf.jabref.model.util.QuotedStringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,33 +30,6 @@ public class ExplicitGroup extends KeywordGroup {
     public ExplicitGroup(String name, GroupHierarchyType context, String keywordSeparator)
             throws ParseException {
         super(name, FieldName.GROUPS, name, true, false, context, keywordSeparator);
-    }
-
-    public static ExplicitGroup fromString(String s, String keywordSeparator) throws ParseException {
-        if (!s.startsWith(ExplicitGroup.ID)) {
-            throw new IllegalArgumentException("ExplicitGroup cannot be created from \"" + s + "\".");
-        }
-        QuotedStringTokenizer tok = new QuotedStringTokenizer(s.substring(ExplicitGroup.ID.length()),
-                AbstractGroup.SEPARATOR, AbstractGroup.QUOTE_CHAR);
-
-        String name = tok.nextToken();
-        int context = Integer.parseInt(tok.nextToken());
-        ExplicitGroup newGroup = new ExplicitGroup(name, GroupHierarchyType.getByNumber(context), keywordSeparator);
-        newGroup.addLegacyEntryKeys(tok);
-        return newGroup;
-    }
-
-    /**
-     * Called only when created fromString.
-     * JabRef used to store the entries of an explicit group in the serialization, e.g.
-     *  ExplicitGroup:GroupName\;0\;Key1\;Key2\;;
-     * This method exists for backwards compatibility.
-     */
-    private void addLegacyEntryKeys(QuotedStringTokenizer tok) {
-        while (tok.hasMoreTokens()) {
-            String key = ModelStringUtil.unquote(tok.nextToken(), AbstractGroup.QUOTE_CHAR);
-            addLegacyEntryKey(key);
-        }
     }
 
     public void addLegacyEntryKey(String key) {

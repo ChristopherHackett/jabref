@@ -7,34 +7,6 @@ public class ModelStringUtil {
     public static final String SPECIAL_COMMAND_CHARS = "\"`^~'=.|";
 
 
-    /**
-     * Unquote special characters.
-     *
-     * @param toUnquote         The String which may contain quoted special characters.
-     * @param quoteChar The quoting character.
-     * @return A String with all quoted characters unquoted.
-     */
-    public static String unquote(String toUnquote, char quoteChar) {
-        StringBuilder result = new StringBuilder();
-        char c;
-        boolean quoted = false;
-        for (int i = 0; i < toUnquote.length(); ++i) {
-            c = toUnquote.charAt(i);
-            if (quoted) { // append literally...
-                if (c != '\n') {
-                    result.append(c);
-                }
-                quoted = false;
-            } else if (c == quoteChar) {
-                // quote char
-                quoted = true;
-            } else {
-                result.append(c);
-            }
-        }
-        return result.toString();
-    }
-
     public static String booleanToBinaryString(boolean expression) {
         return expression ? "1" : "0";
     }

@@ -12,7 +12,6 @@ import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.EntryUtil;
 import net.sf.jabref.model.util.ModelStringUtil;
-import net.sf.jabref.model.util.QuotedStringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,31 +59,6 @@ public class KeywordGroup extends AbstractGroup {
         } catch (PatternSyntaxException exception) {
             throw new ParseException("Syntax error in regular-expression pattern: " + searchExpression);
         }
-    }
-
-    /**
-     * Parses s and recreates the KeywordGroup from it.
-     *
-     * @param s The String representation obtained from
-     *          KeywordGroup.toString()
-     */
-    public static AbstractGroup fromString(String s, String keywordSeparator) throws ParseException {
-        if (!s.startsWith(KeywordGroup.ID)) {
-            throw new IllegalArgumentException("KeywordGroup cannot be created from \"" + s + "\".");
-        }
-        QuotedStringTokenizer tok = new QuotedStringTokenizer(s.substring(KeywordGroup.ID
-                .length()), AbstractGroup.SEPARATOR, AbstractGroup.QUOTE_CHAR);
-
-        String name = tok.nextToken();
-        int context = Integer.parseInt(tok.nextToken());
-        String field = tok.nextToken();
-        String expression = tok.nextToken();
-        boolean caseSensitive = Integer.parseInt(tok.nextToken()) == 1;
-        boolean regExp = Integer.parseInt(tok.nextToken()) == 1;
-        return new KeywordGroup(ModelStringUtil.unquote(name, AbstractGroup.QUOTE_CHAR),
-                ModelStringUtil.unquote(field, AbstractGroup.QUOTE_CHAR),
-                ModelStringUtil.unquote(expression, AbstractGroup.QUOTE_CHAR), caseSensitive, regExp,
-                GroupHierarchyType.getByNumber(context), keywordSeparator);
     }
 
     /**

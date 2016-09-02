@@ -7,13 +7,6 @@ import static org.junit.Assert.assertEquals;
 public class ModelStringUtilTest {
 
     @Test
-    public void testUnquote() {
-        assertEquals("a:", ModelStringUtil.unquote("a::", ':'));
-        assertEquals("a:;", ModelStringUtil.unquote("a:::;", ':'));
-        assertEquals("a:b%c;", ModelStringUtil.unquote("a::b:%c:;", ':'));
-    }
-
-    @Test
     public void testBooleanToBinaryString() {
         assertEquals("0", ModelStringUtil.booleanToBinaryString(false));
         assertEquals("1", ModelStringUtil.booleanToBinaryString(true));

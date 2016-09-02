@@ -7,7 +7,6 @@ import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.search.GroupSearchQuery;
 import net.sf.jabref.model.search.rules.SearchRule;
 import net.sf.jabref.model.util.ModelStringUtil;
-import net.sf.jabref.model.util.QuotedStringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,31 +40,6 @@ public class SearchGroup extends AbstractGroup {
         this.caseSensitive = caseSensitive;
         this.regExp = regExp;
         this.query = new GroupSearchQuery(searchExpression, caseSensitive, regExp);
-    }
-
-    /**
-     * Parses s and recreates the SearchGroup from it.
-     *
-     * @param s The String representation obtained from
-     *          SearchGroup.toString(), or null if incompatible
-     */
-    public static AbstractGroup fromString(String s) {
-        if (!s.startsWith(SearchGroup.ID)) {
-            throw new IllegalArgumentException("SearchGroup cannot be created from \"" + s + "\".");
-        }
-        QuotedStringTokenizer tok = new QuotedStringTokenizer(s.substring(SearchGroup.ID.length()),
-                AbstractGroup.SEPARATOR, AbstractGroup.QUOTE_CHAR);
-
-        String name = tok.nextToken();
-        int context = Integer.parseInt(tok.nextToken());
-        String expression = tok.nextToken();
-        boolean caseSensitive = Integer.parseInt(tok.nextToken()) == 1;
-        boolean regExp = Integer.parseInt(tok.nextToken()) == 1;
-        // version 0 contained 4 additional booleans to specify search
-        // fields; these are ignored now, all fields are always searched
-        return new SearchGroup(ModelStringUtil.unquote(name, AbstractGroup.QUOTE_CHAR),
-                ModelStringUtil.unquote(expression, AbstractGroup.QUOTE_CHAR), caseSensitive, regExp,
-                GroupHierarchyType.getByNumber(context));
     }
 
     @Override
